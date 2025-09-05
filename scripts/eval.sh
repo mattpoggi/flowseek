@@ -34,14 +34,14 @@ python evaluate.py --cfg config/eval/flowseek-L.json --model weights/flowseek_M_
 
 echo "TABLE 4"
 echo "Validation FlowSeek (T)"
-python evaluate.py --cfg config/eval/flowseek-T.json --model weights/flowseek_T_TartanCT.pth --dataset spring --scale -1
+python evaluate.py --cfg config/eval/flowseek-T.json --model weights/flowseek_T_TartanCT_TSKH.pth --dataset spring --scale -1
 echo "Validation FlowSeek (S)"
-python evaluate.py --cfg config/eval/flowseek-S.json --model weights/flowseek_T_TartanCT.pth --dataset spring --scale -1
+python evaluate.py --cfg config/eval/flowseek-S.json --model weights/flowseek_T_TartanCT_TSKH.pth --dataset spring --scale -1
 
 echo "Validation FlowSeek (M)"
-python evaluate.py --cfg config/eval/flowseek-M.json --model weights/flowseek_M_TartanCT.pth --dataset spring --scale -1
+python evaluate.py --cfg config/eval/flowseek-M.json --model weights/flowseek_M_TartanCT_TSKH.pth --dataset spring --scale -1
 echo "Validation FlowSeek (L)"
-python evaluate.py --cfg config/eval/flowseek-L.json --model weights/flowseek_M_TartanCT.pth --dataset spring --scale -1
+python evaluate.py --cfg config/eval/flowseek-L.json --model weights/flowseek_M_TartanCT_TSKH.pth --dataset spring --scale -1
 
 echo "TABLE 5 + TABLE B (SUPPLEMENTARY)"
 echo "Validation FlowSeek (T)"
