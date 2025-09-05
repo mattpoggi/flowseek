@@ -1,0 +1,13 @@
+{
+    "paths": 
+    {
+        "tartanair": "data/Tartanair/",
+        "chairs": "data/FlyingChairs/data",
+        "things": "data/FlyingThings3D/",
+        "sintel": "data/MPI-Sintel/",
+        "kitti": "data/KITTI/2015/",
+        "hd1k": "data/HD1K/",
+        "spring": "data/spring/",
+        "layeredflow": "data/public_layeredflow_benchmark"
+    }
+}

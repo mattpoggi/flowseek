@@ -1,0 +1,9 @@
+gdown
+numpy
+h5py
+Pillow
+opencv-python
+torch==2.4.1
+torchvision==0.19.1
+scikit-learn
+huggingface_hub

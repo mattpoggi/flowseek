@@ -1,0 +1,29 @@
+{
+    "name": "flowseek_M_TartanCT",
+    "dataset": "things",
+    "gpus": [0],
+
+    "use_var": true,
+    "var_min": 0,
+    "var_max": 10,
+    "pretrain": "resnet34",
+    "initial_dim": 64,
+    "block_dims": [64, 128, 256],
+    "radius": 4,
+    "dim": 128,
+    "num_blocks": 2,
+    "iters": 4,
+
+    "image_size": [432, 960],
+    "scale": 0,
+    "batch_size": 2,
+    "epsilon": 1e-8,
+    "lr": 4e-4,
+    "wdecay": 1e-5,
+    "dropout": 0,
+    "clip": 1.0,
+    "gamma": 0.85,
+    "num_steps": 120000,
+
+    "da_size": "vitb"
+}
