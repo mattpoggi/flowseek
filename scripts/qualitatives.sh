@@ -18,8 +18,8 @@ python demo.py --cfg config/eval/flowseek-T.json --model weights/flowseek_T_Tart
 python demo.py --cfg config/eval/flowseek-T.json --model weights/flowseek_T_TartanCT.pth --dataset kitti --id 170
 
 echo "FIGURE E"
-python demo.py --cfg config/eval/flowseek-T.json --model weights/flowseek_T_TSKH.pth --dataset spring --id 11920 --scale -1
-python demo.py --cfg config/eval/flowseek-T.json --model weights/flowseek_T_TSKH.pth --dataset spring --id 650 --scale -1
+python demo.py --cfg config/eval/flowseek-T.json --model weights/flowseek_T_TartanCT_TSKH.pth --dataset spring --id 11920 --scale -1
+python demo.py --cfg config/eval/flowseek-T.json --model weights/flowseek_T_TartanCT_TSKH.pth --dataset spring --id 650 --scale -1
 
 echo "FIGURE F"
 python demo.py --cfg config/eval/flowseek-T.json --model weights/flowseek_T_TartanCT.pth --dataset spring --id 7461 --scale -1
