@@ -18,7 +18,7 @@ University of Bologna<sup>1</sup>
 
 <h2 align="center"> 
 
-[Project Page](https://flowseek25.github.io/) | [Paper](https://flowseek25.github.io/) |  [Supplementary](https://flowseek25.github.io/) | [Poster](https://iccv.thecvf.com/media/PosterPDFs/ICCV%202025/1668.png?t=1756118189.8297398) 
+[Project Page](https://flowseek25.github.io/) | [Paper + Supplementary]([https://flowseek25.github.io/](https://arxiv.org/abs/2509.05297)) | [Poster](https://iccv.thecvf.com/media/PosterPDFs/ICCV%202025/1668.png?t=1756118189.8297398) 
 </h2>
 
 **Note**: 🚧 Kindly note that this repository is currently in the development phase. We are actively working to add and refine features and documentation. We apologize for any inconvenience caused by incomplete or missing elements and appreciate your patience as we work towards completion.
