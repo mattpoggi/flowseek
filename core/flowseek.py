@@ -213,30 +213,56 @@ class FlowSeek(
         flow_predictions.append(flow_up)
         info_predictions.append(info_up)
             
+        #if self.args.iters > 0:
+        #    # run the feature network
+        #    fmap1_8x = self.fnet(image1)
+        #    fmap2_8x = self.fnet(image2)
+        #
+        #    fmap1_8x = torch.cat((fmap1_8x,mono1), 1)
+        #    fmap2_8x = torch.cat((fmap2_8x,mono2), 1)
+
+        #    corr_fn = CorrBlock(fmap1_8x, fmap2_8x, self.args)
+        
         if self.args.iters > 0:
-            # run the feature network
+        # CNN encoder： FP16
             fmap1_8x = self.fnet(image1)
             fmap2_8x = self.fnet(image2)
 
-            fmap1_8x = torch.cat((fmap1_8x,mono1), 1)
-            fmap2_8x = torch.cat((fmap2_8x,mono2), 1)
+            fmap1_8x = torch.cat((fmap1_8x, mono1), 1)
+            fmap2_8x = torch.cat((fmap2_8x, mono2), 1)
 
-            corr_fn = CorrBlock(fmap1_8x, fmap2_8x, self.args)
+            #  CorrBlock : FP32
+            with torch.autocast(device_type='cuda', enabled=False):
+                fmap1_8x = fmap1_8x.float()
+                fmap2_8x = fmap2_8x.float()
+                corr_fn = CorrBlock(fmap1_8x, fmap2_8x, self.args)
+
 
         for itr in range(iters):
             N, _, H, W = flow_8x.shape
             flow_8x = flow_8x.detach()
+
             coords2 = (coords_grid(N, H, W, device=image1.device) + flow_8x).detach()
-            corr = corr_fn(coords2, dilation=dilation)
-            net = self.update_block(net, context, corr, flow_8x)
+
+            # FP32（update block not compatible with FP16）
+            with torch.autocast(device_type='cuda', enabled=False):
+                corr = corr_fn(coords2, dilation=dilation)
+
+                net = net.float()
+                context = context.float()
+                flow_8x = flow_8x.float()
+
+                net = self.update_block(net, context, corr, flow_8x)
+
             flow_update = self.flow_head(net)
             weight_update = .25 * self.upsample_weight(net)
             flow_8x = flow_8x + flow_update[:, :2]
             info_8x = flow_update[:, 2:]
-            # upsample predictions
+
             flow_up, info_up = self.upsample_data(flow_8x, info_8x, weight_update)
             flow_predictions.append(flow_up)
             info_predictions.append(info_up)
+
 
         for i in range(len(info_predictions)):
             flow_predictions[i] = padder.unpad(flow_predictions[i])

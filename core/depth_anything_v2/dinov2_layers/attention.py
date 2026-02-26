@@ -62,6 +62,7 @@ class Attention(nn.Module):
         return x
 
 
+
 class MemEffAttention(Attention):
     def forward(self, x: Tensor, attn_bias=None) -> Tensor:
         if not XFORMERS_AVAILABLE:
@@ -72,12 +73,21 @@ class MemEffAttention(Attention):
         qkv = self.qkv(x).reshape(B, N, 3, self.num_heads, C // self.num_heads)
 
         q, k, v = unbind(qkv, 2)
-
-        x = memory_efficient_attention(q, k, v, attn_bias=attn_bias)
+        
+        q_half = q.to(dtype=torch.float16)
+        k_half = k.to(dtype=torch.float16)
+        v_half = v.to(dtype=torch.float16)
+        
+        #x = memory_efficient_attention(q, k, v, attn_bias=attn_bias)
+        with autocast(device_type="cuda", dtype=torch.float16):
+            x = memory_efficient_attention(q_half, k_half, v_half, attn_bias=attn_bias)
+        x = x.to(torch.float32)
         x = x.reshape([B, N, C])
 
         x = self.proj(x)
         x = self.proj_drop(x)
         return x
+
+        
 
         
